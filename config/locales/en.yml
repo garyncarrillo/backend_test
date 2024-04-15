@@ -29,3 +29,4 @@
 
 en:
   hello: "Hello world"
+  cant_be_deleted: "It not posible to delete"
