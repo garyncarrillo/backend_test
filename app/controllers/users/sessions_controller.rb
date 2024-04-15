@@ -24,4 +24,17 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  def create
+    super do |resource|
+      jwt_token = request.env['warden-jwt_auth.token']
+      render json: { jwt: jwt_token, message: "Logged in successfully.", user: resource }, status: :ok and return
+    end
+  end
+
+  private
+
+  def respond_to_on_destroy
+    head :no_content
+  end
 end

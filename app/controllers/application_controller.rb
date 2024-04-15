@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  respond_to :json
   before_action :authenticate_user!  
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
