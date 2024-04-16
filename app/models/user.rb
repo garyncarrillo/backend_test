@@ -7,4 +7,6 @@ class User < ApplicationRecord
          jwt_revocation_strategy: MyCustomStrategy
 
   has_many :products
+
+  validates :email, presence: true, uniqueness: true
 end
