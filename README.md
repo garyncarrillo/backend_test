@@ -22,3 +22,9 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+# Add enviroment variable
+- create .env
+- add the variables in the .env file as shown in the .example.txt file with the corresponding url
+ 
