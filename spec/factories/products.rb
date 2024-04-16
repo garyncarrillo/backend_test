@@ -4,5 +4,6 @@ FactoryBot.define do
     description { "MyString" }
     price { "9.99" }
     is_active { true }
+    association :user
   end
 end
