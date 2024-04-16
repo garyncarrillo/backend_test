@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
   end
 
   def update
-    product = @product_service.update_product(params, product_params)
+    product = @product_service.update_product(product_params)
     
     if product
       render json: product, serializer: ProductSerializer, status: 201
@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
 
   def destroy
     begin
-      @product_service.destroy(params)
+      @product_service.destroy()
       head :no_content
     rescue => e
       render json: { errors: {base: I18n.t(:cant_be_deleted)} }, status: :unprocessable_entity
@@ -36,14 +36,14 @@ class ProductsController < ApplicationController
   end
 
   def show
-    product = @product_service.fetch_one(params)
+    product = @product_service.fetch_one()
     render json: product, serializer: ProductSerializer, status: 201
   end
 
   private
 
   def set_product_service
-    @product_service = ProductService.new
+    @product_service = ProductService.new(current_user, params)
   end
 
   def product_params

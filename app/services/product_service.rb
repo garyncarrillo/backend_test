@@ -1,35 +1,40 @@
 # app/services/product_service.rb
 class ProductService
-    def create(product_params)
-        product = Product.create(product_params)
+    def initialize(current_user, params)
+      @current_user = current_user
+      @params = params
     end
 
-    def update_product(params, product_params)
-        set_product(params)
+    def create(product_params)
+        product = @current_user.products.create(product_params)
+    end
+
+    def update_product(product_params)
+        set_product()
         @product.update(product_params)
         @product
     end
 
-    def destroy(params)
-        set_product(params)
+    def destroy()
+        set_product()
         @product.destroy
     end
     
     def fetch_all()
-        get_products
+        get_products()
     end
 
-    def fetch_one(params)
-        set_product(params)
+    def fetch_one()
+        set_product()
     end
 
     private
 
-    def set_product(params)
-        @product = Product.find(params[:id])
+    def set_product()
+        @product = @current_user.products.find(@params[:id])
     end
 
-    def get_products
-        Product.all()
+    def get_products()
+        @current_user.products.all()
     end
 end
