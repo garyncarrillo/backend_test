@@ -10,9 +10,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super do |resource|
+      render json: { message: "Logged in successfully.", user: resource }, status: :ok and return
+    end
+  end
 
   # GET /resource/edit
   # def edit
